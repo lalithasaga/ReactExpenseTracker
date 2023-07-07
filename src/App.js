@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AuthForm from './components/Authform';
+import Header from './components/Header';
+import { AuthContextProvider } from './components/AuthContext';
+import Dashboard from './components/Dashboard';
+import ContactDetailsForm from './components/ContactDetailsForm';
+import ExpenseForm from './components/ExpenseForm'; // Import the ExpenseForm component
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthContextProvider>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<AuthForm />} />
+          <Route path="/signup" element={<AuthForm />} />
+          <Route path="/login" element={<AuthForm />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/contact" element={<ContactDetailsForm />} />
+          <Route path="/expense" element={<ExpenseForm />} /> 
+          </Routes>
+      </Router>
+    </AuthContextProvider>
   );
-}
+};
 
-export default App;
+export default App; 
+
